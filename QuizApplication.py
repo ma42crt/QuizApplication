@@ -63,3 +63,7 @@ def login():
             attempts+=1
     print("You used the all attempts please try again later")
     return
+def user_answer():
+    return
+def run_quiz():
+    return
