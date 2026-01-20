@@ -1,5 +1,5 @@
 
-# Function to store all quiz questions, options and their answer
+# function to store all quiz questions, options and their answer
 def quiz_questions():
     return [
         {"question": "Which device is used to input text into a computer?",
@@ -60,7 +60,7 @@ def login():
         username = input("Enter User Name: ")
         password = input("Enter Password: ")
 
-        # Check if username and password are correct
+        # check if username and password are correct
         if username == correct_username and password == correct_password:
             print("\nLogin Successful!\n")
             return True  # login successful and then next process
@@ -91,14 +91,14 @@ def run_quiz():
     questions = quiz_questions()  # to get the question from question list
     score = 0
 
-    # Loop through each question
+    # loop through each question
     for i in range(len(questions)):
         question = questions[i]
 
-        # Print question number and text
+        # print question number and text
         print(f"Question {i + 1}: {question['question']}")
 
-        # Print all 4 options
+        # print all 4 options
         for j in range(4):
             print(f"{j + 1}. {question['options'][j]}")
 
@@ -111,15 +111,15 @@ def run_quiz():
         else:
             print("Incorrect.\n")
 
-    # Show final score
+    # show final score
     print("Quiz Finished!")
     print("Your final score:", score, "/", len(questions))
 
-    # Show percentage score
+    # show percentage score
     percentage = (score / len(questions)) * 100
     print(f"Your percentage score: {percentage:.2f}%")
 
-    # Show pass/fail
+    # show pass/fail
     if percentage >= 50:
         print("Congratulations! You passed the quiz.")
     else:
@@ -127,6 +127,7 @@ def run_quiz():
     print("Thank you for playing the Holton College Quiz!")
 
 
-# Program starts here
+# program starts here
+# first the program will run the login function and then the main quiz
 if login():
     run_quiz()
