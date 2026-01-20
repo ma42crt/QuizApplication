@@ -63,15 +63,16 @@ def login():
         # Check if username and password are correct
         if username == correct_username and password == correct_password:
             print("\nLogin Successful!\n")
-            return True  # login successful, proceed to quiz
+            return True  # login successful and then next process
         else:
             print("Details are incorrect. Please try again.\n")
             attempts += 1
 
     print("You used all attempts. Please try again later.")
-    return False  # login failed, stop program
+    return False  # login failed, it will stop the program here 
 
 def user_answer():
+    # while loop will ask the user for input until the user input valid input
     while True:
         answer = input("Your answer (1-4): ")
         if answer in ["1", "2", "3", "4"]:
