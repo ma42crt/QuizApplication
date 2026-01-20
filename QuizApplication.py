@@ -82,14 +82,7 @@ def user_answer():
 
 
 def run_quiz():
-    """
-        Main quiz logic:
-        - Loops through each question
-        - Displays the question and options
-        - Checks the user's answer
-        - Calculates score
-        - Displays final score, percentage, and pass/fail
-        """
+        
 
     print("Welcome to the Holton College Digital Quiz!")
     print("Choose the correct option (1–4).\n")
