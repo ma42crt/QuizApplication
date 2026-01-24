@@ -1,5 +1,6 @@
+import random
 
-# Function to store all quiz questions, options and their answer
+# function to store all quiz questions, options and their answer
 def quiz_questions():
     return [
         {"question": "Which device is used to input text into a computer?",
@@ -7,7 +8,7 @@ def quiz_questions():
          "answer": 2},
 
         {"question": "What does RAM stand for?",
-         "options": ["Read Access Memory", "Random Access Memory","Run Access Memory", "Rapid Action Memory"],
+         "options": ["Read Access Memory", "Random Access Memory", "Run Access Memory", "Rapid Action Memory"],
          "answer": 2},
 
         {"question": "Which number is an even number?",
@@ -51,6 +52,7 @@ def quiz_questions():
          "answer": 4},
     ]
 
+
 # function to run login
 def login():
     correct_username = "admin"
@@ -60,18 +62,32 @@ def login():
         username = input("Enter User Name: ")
         password = input("Enter Password: ")
 
-        # Check if username and password are correct
+        # check if username and password are correct
         if username == correct_username and password == correct_password:
             print("\nLogin Successful!\n")
-            return True  # login successful, proceed to quiz
+            return True  # login successful and then next process
         else:
             print("Details are incorrect. Please try again.\n")
             attempts += 1
 
     print("You used all attempts. Please try again later.")
-    return False  # login failed, stop program
+    return False  # login failed, it will stop the program here
+
+def get_player_name():
+    name = input("Enter your name: ")
+    return name
+
+def show_rules():
+        print("===== QUIZ RULES =====")
+        print("• You will be asked multiple-choice questions")
+        print("• Each question has 4 options (1–4)")
+        print("• Enter the correct option number")
+        print("• No negative marking")
+        print("• You need 50% to pass the quiz")
+        print("======================\n")
 
 def user_answer():
+    # while loop will ask the user for input until the user input valid input
     while True:
         answer = input("Your answer (1-4): ")
         if answer in ["1", "2", "3", "4"]:
@@ -80,31 +96,29 @@ def user_answer():
             print("Invalid input. Please enter 1, 2, 3, or 4.")
 
 
-
 def run_quiz():
-    """
-        Main quiz logic:
-        - Loops through each question
-        - Displays the question and options
-        - Checks the user's answer
-        - Calculates score
-        - Displays final score, percentage, and pass/fail
-        """
-
     print("Welcome to the Holton College Digital Quiz!")
+    show_rules()
+
+    player_name = get_player_name()
+    print(f"\nGood luck, {player_name}!\n")
+
     print("Choose the correct option (1–4).\n")
 
+
     questions = quiz_questions()  # to get the question from question list
+    random.shuffle(questions)
     score = 0
 
-    # Loop through each question
+
+    # loop through each question
     for i in range(len(questions)):
         question = questions[i]
 
-        # Print question number and text
+        # print question number and text
         print(f"Question {i + 1}: {question['question']}")
 
-        # Print all 4 options
+        # print all 4 options
         for j in range(4):
             print(f"{j + 1}. {question['options'][j]}")
 
@@ -115,17 +129,18 @@ def run_quiz():
             print("Correct!\n")
             score += 1
         else:
-            print("Incorrect.\n")
+            correct_option = question["options"][question["answer"] - 1]
+            print(f"Incorrect. The correct answer is: {correct_option}\n")
 
-    # Show final score
+    # show final score
     print("Quiz Finished!")
     print("Your final score:", score, "/", len(questions))
 
-    # Show percentage score
+    # show percentage score
     percentage = (score / len(questions)) * 100
     print(f"Your percentage score: {percentage:.2f}%")
 
-    # Show pass/fail
+    # show pass/fail
     if percentage >= 50:
         print("Congratulations! You passed the quiz.")
     else:
@@ -133,6 +148,7 @@ def run_quiz():
     print("Thank you for playing the Holton College Quiz!")
 
 
-# Program starts here
+# program starts here
+# first the program will run the login function and then the main quiz
 if login():
     run_quiz()
