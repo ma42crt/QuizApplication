@@ -50,6 +50,39 @@ def quiz_questions():
         {"question": "Which shape has four equal sides?",
          "options": ["Rectangle", "Triangle", "Circle", "Square"],
          "answer": 4},
+        {"question": "What does CPU stand for?",
+         "options": ["Central Processing Unit", "Computer Personal Unit", "Central Program Utility",
+                     "Control Processing Unit"],
+         "answer": 1},
+
+        {"question": "Which device displays output on a computer?",
+         "options": ["Keyboard", "Mouse", "Monitor", "Scanner"],
+         "answer": 3},
+
+        {"question": "Which of these is an input device?",
+         "options": ["Printer", "Speaker", "Monitor", "Mouse"],
+         "answer": 4},
+
+        {"question": "What is the full form of USB?",
+         "options": ["Universal Serial Bus", "United System Bus", "Universal System Board", "User Serial Bus"],
+         "answer": 1},
+
+        {"question": "Which of these is used to store data permanently?",
+         "options": ["RAM", "Cache", "Hard Disk", "CPU"],
+         "answer": 3},
+
+        {"question": "Which key is used to create a new line?",
+         "options": ["Shift", "Enter", "Ctrl", "Tab"],
+         "answer": 2},
+
+        {"question": "What is the result of 10 + 5?",
+         "options": ["12", "13", "14", "15"],
+         "answer": 4},
+
+        {"question": "Which of these is a programming language?",
+         "options": ["Windows", "Python", "Keyboard", "Monitor"],
+         "answer": 2},
+
     ]
 
 
@@ -95,6 +128,10 @@ def user_answer():
         else:
             print("Invalid input. Please enter 1, 2, 3, or 4.")
 
+def save_result(name, score, total):
+    with open("quiz_results.txt", "a") as file:
+        file.write(f"{name}: {score}/{total}\n")
+
 
 def run_quiz():
     print("Welcome to the Holton College Digital Quiz!")
@@ -105,9 +142,9 @@ def run_quiz():
 
     print("Choose the correct option (1–4).\n")
 
-
-    questions = quiz_questions()  # to get the question from question list
+    questions = quiz_questions()
     random.shuffle(questions)
+
     score = 0
 
 
@@ -134,7 +171,8 @@ def run_quiz():
 
     # show final score
     print("Quiz Finished!")
-    print("Your final score:", score, "/", len(questions))
+    print(f"{player_name}, your final score is {score}/{len(questions)}")
+    save_result(player_name, score, len(questions))
 
     # show percentage score
     percentage = (score / len(questions)) * 100
