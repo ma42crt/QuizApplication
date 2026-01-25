@@ -106,6 +106,7 @@ def login():
     print("You used all attempts. Please try again later.")
     return False  # login failed, it will stop the program here
 
+# function to get user name
 def get_player_name():
     name = input("Enter your name: ")
     return name
@@ -115,7 +116,6 @@ def show_rules():
         print("• You will be asked multiple-choice questions")
         print("• Each question has 4 options (1–4)")
         print("• Enter the correct option number")
-        print("• No negative marking")
         print("• You need 50% to pass the quiz")
         print("======================\n")
 
@@ -128,9 +128,20 @@ def user_answer():
         else:
             print("Invalid input. Please enter 1, 2, 3, or 4.")
 
+# this function save the result and name
 def save_result(name, score, total):
     with open("quiz_results.txt", "a") as file:
         file.write(f"{name}: {score}/{total}\n")
+
+# function if the user want to play again
+def play_again():
+    while True:
+        choice = input("Do you want to play again? (y/n): ").lower()
+        if choice in ["y", "n"]:
+            return choice == "y"
+        else:
+            print("Please enter y or n.")
+
 
 
 def run_quiz():
@@ -143,6 +154,7 @@ def run_quiz():
     print("Choose the correct option (1–4).\n")
 
     questions = quiz_questions()
+    # random.shuffle is use to change the question numbers
     random.shuffle(questions)
 
     score = 0
@@ -163,11 +175,11 @@ def run_quiz():
         user_ans = user_answer()
 
         if user_ans == question["answer"]:
-            print("Correct!\n")
+            print("✔ Correct!\n")
             score += 1
         else:
             correct_option = question["options"][question["answer"] - 1]
-            print(f"Incorrect. The correct answer is: {correct_option}\n")
+            print(f"✖ Incorrect. The correct answer is: {correct_option}\n")
 
     # show final score
     print("Quiz Finished!")
@@ -189,4 +201,10 @@ def run_quiz():
 # program starts here
 # first the program will run the login function and then the main quiz
 if login():
-    run_quiz()
+    while True:
+        run_quiz()
+        # user can play again if the user not happy with the scores
+        if not play_again():
+            print("Goodbye! Thanks for playing.")
+            break
+
